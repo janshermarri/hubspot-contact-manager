@@ -139,6 +139,8 @@ class HubspotContactManager:
                             print("Error creating contact..")
                     else:
                         print(f'Contact already exists for {record["first_name"]} {record["last_name"]}.')
+                        records_to_update_in_db.append({'db_id': record['id'], 'hubspot_id': data["contacts"][0]["vid"]})
+
                 else:
                     print("Request failed with status code:", search_contact_response.status_code)
         except (Exception, psycopg2.DatabaseError) as error:
